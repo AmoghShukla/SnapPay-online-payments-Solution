@@ -23,9 +23,9 @@ class Account_Class(Base):
     Account_number = Column(default=lambda: str(uuid4()),primary_key=True, index=True)
     Account_balance = Column(Integer, default=0)
     Account_type = Column(SQLAlchemyEnum(AccountType), default=AccountType.SAVINGS)
-    IFSC_Code = Column(..., Integer)
-    Pan_Card = Column(..., String)
-    Adhaar_Card = Column(..., Integer)
+    IFSC_Code = Column(..., Integer, nullable=False)
+    Pan_Card = Column(..., String, nullable=False)
+    Adhaar_Card = Column(..., Integer, nullable=False)
     is_primary = Column(..., Boolean, default=True)
 
 
