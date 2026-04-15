@@ -2,6 +2,7 @@ import enum
 from uuid import uuid4
 from src.database.base import Base
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Enum as SQLAlchemyEnum
+from sqlalchemy.orm import relationship
 
 class AccountType(enum.Enum):
     SAVINGS = "SAVINGS"
@@ -27,5 +28,7 @@ class Account_Class(Base):
     Pan_Card = Column(..., String, nullable=False)
     Adhaar_Card = Column(..., Integer, nullable=False)
     is_primary = Column(..., Boolean, default=True)
+
+    owner = relationship('User', back_populates='account')
 
 

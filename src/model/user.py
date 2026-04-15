@@ -3,6 +3,7 @@ from sqlalchemy import Column, DateTime, String, Integer
 from datetime import datetime
 from enum import Enum
 from src.database.base import Base
+from sqlalchemy.orm import relationship
 
 class UserRole(Enum):
     USER = "USER"
@@ -24,3 +25,5 @@ class User_Class(Base):
     user_email = Column(String, nullable=False)
     user_contact_no = Column(String, nullable=False)
     user_created_at = Column(DateTime, default=datetime.utcnow)
+
+    account = relationship("Account", back_populate='owner')
