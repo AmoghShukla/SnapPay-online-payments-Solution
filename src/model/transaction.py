@@ -23,5 +23,6 @@ class Transaction_Class(Base):
     transaction_amount = Column(Integer, nullable=False)
     transaction_date = Column(Date, default= date.today)
     transaction_time = Column(DateTime, default= datetime.now(UTC))
+    reciever_account_id = Column(String, nullable=False)
     sender_account_id = Column(String, nullable=False)
     transaction_status = Column(SQLAlchemyEnum(TransactionStatus), nullable=False)
