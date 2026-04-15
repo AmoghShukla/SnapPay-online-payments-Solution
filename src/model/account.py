@@ -30,5 +30,3 @@ class Account_Class(Base):
     is_primary = Column(..., Boolean, default=True)
 
     owner = relationship('User', back_populates='account')
-
-

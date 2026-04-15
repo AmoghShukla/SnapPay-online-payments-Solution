@@ -1,5 +1,5 @@
 from uuid import uuid4
-from sqlalchemy import Column, DateTime, String, Integer
+from sqlalchemy import Column, DateTime, ForeignKey, String, Integer
 from datetime import datetime
 from enum import Enum
 from src.database.base import Base
@@ -25,5 +25,7 @@ class User_Class(Base):
     user_email = Column(String, nullable=False)
     user_contact_no = Column(String, nullable=False)
     user_created_at = Column(DateTime, default=datetime.utcnow)
+    user_wallet_id = Column(Integer, ForeignKey('Wallet.wallet_id'))
 
-    account = relationship("Account", back_populate='owner')
+    account = relationship("Account_Class", back_populate='owner')
+    wallet = relationship("Wallet_Class", back_populates='owner')
