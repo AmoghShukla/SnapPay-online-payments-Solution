@@ -2,13 +2,14 @@ from uuid import uuid4
 from sqlalchemy import Column, DateTime, String, Integer
 from datetime import datetime
 from enum import Enum
+from src.database.base import Base
 
 class UserRole(Enum):
     USER = "USER"
     ADMIN = "ADMIN"
     MANAGER = "MANAGER"
 
-class User_Class:
+class User_Class(Base):
     __tablename__ = "User"
 
     def generate_upi(context):
