@@ -19,10 +19,10 @@ class Account_Class(Base):
     __tablename__="Account"
 
     user_id = Column(Integer, ForeignKey('User.user_id'), nullable=False)
-    Bank_name = Column(Enum)
+    Bank_name = Column(SQLAlchemyEnum(Banks), nullable=False)
     Account_number = Column(default=lambda: str(uuid4()),primary_key=True, index=True)
     Account_balance = Column(Integer, default=0)
-    Account_type = Column(Enum, default=AccountType.SAVINGS)
+    Account_type = Column(SQLAlchemyEnum(AccountType), default=AccountType.SAVINGS)
     IFSC_Code = Column(..., Integer)
     Pan_Card = Column(..., String)
     Adhaar_Card = Column(..., Integer)
