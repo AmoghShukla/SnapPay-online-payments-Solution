@@ -27,5 +27,5 @@ class User_Class(Base):
     user_created_at = Column(DateTime, default=datetime.utcnow)
     user_wallet_id = Column(Integer, ForeignKey('Wallet.wallet_id'))
 
-    account = relationship("Account_Class", back_populate='owner')
+    account = relationship("Account_Class", back_populates='owner')
     wallet = relationship("Wallet_Class", back_populates='owner')
