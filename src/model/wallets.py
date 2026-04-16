@@ -11,4 +11,4 @@ class Wallet_Class(Base):
     wallet_id = Column(default= lambda : str(uuid4()), primary_key=True)
     wallet_balance = Column(Integer, default=0)
 
-    owner = relationship('User_Class', back_populates='')
+    owner = relationship('User_Class', back_populates='wallet')
