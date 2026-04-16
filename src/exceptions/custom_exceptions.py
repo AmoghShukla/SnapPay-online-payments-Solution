@@ -11,3 +11,5 @@ class Custom_Exception:
     @staticmethod
     def NotFoundError(RepositoryError):
         pass
+
+custom_exp = Custom_Exception()
