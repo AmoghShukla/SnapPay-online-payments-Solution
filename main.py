@@ -1,9 +1,8 @@
 from fastapi import FastAPI
-from src.router.auth import Signup as SignUpRouter
-
+from src.router.auth import router as AuthRouter
 app = FastAPI(title="SnapPay : Your Payments Solution Partner")
 
-app.include_router(SignUpRouter)
+app.include_router(AuthRouter)
 
 @app.get('/')
 def home():

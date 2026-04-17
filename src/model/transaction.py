@@ -18,7 +18,7 @@ class TransactionStatus(enum.Enum):
 class Transaction_Class(Base):
     __tablename__="Transaction"
 
-    transaction_id = Column(default =lambda : str(uuid4()), primary_key=True)
+    transaction_id = Column(String, default =lambda : str(uuid4()), primary_key=True)
     transaction_type = Column(SQLAlchemyEnum(TransactionType), nullable=False)
     transaction_amount = Column(Integer, nullable=False)
     transaction_date = Column(Date, default= date.today)

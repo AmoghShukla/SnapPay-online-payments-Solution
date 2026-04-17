@@ -9,8 +9,7 @@ class UserRepository:
     @staticmethod
     def create_user(payload, db : Session):
         try:
-
-            existing = UserRepository.check_user_by_email(payload.user_email)
+            existing = UserRepository.get_user_by_email(payload.user_email)
 
             if existing:
                 raise Custom_Exception.RepositoryError('User Already Exists!!')
@@ -20,11 +19,13 @@ class UserRepository:
                     new_user.user_role = UserRole.USER
             else:
                 role = payload.user_role if hasattr(payload, "user_role") and payload.user_role is not None else UserRole.USER
+                role = UserRole.USER if UserRepository.has_admin(db) else UserRole.ADMIN 
                 new_user = User_Class(
                     user_name = payload.user_name,
                     user_email = payload.user_email,
                     user_password = payload.user_password,
-                    user_contact_no = payload.user_contact_no
+                    user_contact_no = payload.user_contact_no, 
+                    user_role = role
                 )
             db.add(new_user)
             db.commit()
@@ -36,9 +37,12 @@ class UserRepository:
 
     
     @staticmethod
-    def check_user_by_email(user_email , db : Session):
+    def get_user_by_email(user_email , db : Session):
         try:
             db.query('User_Class').filter(User_Class.user_email==user_email).first()
         except SQLAlchemyError as e:
             raise Custom_Exception.RepositoryError('User Email-Id Not Found in Database') from e
         
+    @staticmethod
+    def has_admin(db):
+        return db.query(User_Class).filter(User_Class.user_role == UserRole.ADMIN).first() is not None

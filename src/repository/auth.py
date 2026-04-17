@@ -3,5 +3,5 @@
 class AuthRepository:
 
     @staticmethod
-    def make_Manager():
+    def hash():
         pass

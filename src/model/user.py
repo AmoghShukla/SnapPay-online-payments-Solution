@@ -18,14 +18,13 @@ class User_Class(Base):
         return f"{params}@upi"
 
     user_id = Column(String, primary_key=True, default=lambda: str(uuid4()))
-    upi_id = Column(default=generate_upi)
+    upi_id = Column(String, default=generate_upi)
     user_name = Column(String, unique=True, nullable=False)
     user_password = Column(String, nullable=False)
     user_role = Column(String, nullable=False)
     user_email = Column(String, nullable=False)
     user_contact_no = Column(String, nullable=False)
     user_created_at = Column(DateTime, default=datetime.utcnow)
-    user_wallet_id = Column(Integer, ForeignKey('Wallet.wallet_id'))
 
     account = relationship("Account_Class", back_populates='owner')
-    wallet = relationship("Wallet_Class", back_populates='owner')
+    wallet = relationship("Wallet_Class", back_populates="owner", uselist=False)
