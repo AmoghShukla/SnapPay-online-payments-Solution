@@ -18,8 +18,7 @@ class UserRepository:
                 if new_user.user_role is None:
                     new_user.user_role = UserRole.USER
             else:
-                role = payload.user_role if hasattr(payload, "user_role") and payload.user_role is not None else UserRole.USER
-                role = UserRole.USER if UserRepository.has_admin(db) else UserRole.ADMIN 
+                role = payload.user_role if hasattr(payload, "user_role") and payload.user_role is not None else UserRole.USER 
                 new_user = User_Class(
                     user_name = payload.user_name,
                     user_email = payload.user_email,
